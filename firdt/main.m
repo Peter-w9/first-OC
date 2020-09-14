@@ -19,11 +19,16 @@
     double _size;
     int _color;
 }
+
 @end
 
 //实现类
 @implementation Iphone
-
+//OC中类方法用+ 对象方法用-
+- (void) about
+{
+    NSLog(@"device log:");
+}
 @end
 int main(int argc, const char * argv[]) {
     //自动释放池
@@ -39,6 +44,8 @@ int main(int argc, const char * argv[]) {
     p->_color = 0;
     p->_model = 3.1;
     p->_cpu = 1;
+    
+    [p about];
     struct Person {
         int age;
         char *name;
