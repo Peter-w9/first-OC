@@ -22,6 +22,20 @@
 
 @end
 
+@interface  MyClass : NSObject
+{
+    int count;
+    id data;
+    NSString* name;
+}
+//方法类型标识符 (返回类型) 方法签名关键词:(参数类型)参数名 方法签名关键词:(参数类型)参数名
+//NSUInteger是无符号的，即没有负数,NSInteger是有符号的
+-(void)insertObject:(id)anObject atIndex:(NSUInteger)index;
+-(id) initWithString:(NSString*)aName;
++(MyClass*)createMyClassWithString:(NSString*)aName;
+
+@end
+
 //实现类
 @implementation Iphone
 //OC中类方法用+ 对象方法用-
@@ -36,7 +50,7 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         NSLog(@"Objective-C OK!");
-          
+        NSLog(@"%i", 2^10);
     }
     Iphone *p = [Iphone new];
     //使用一个指针 保存了 一个对象的地址 那么称这个指针为某个类型的对象
