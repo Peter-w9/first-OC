@@ -8,22 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Test.h"
+#import "Soldier.h"
 /*
  
  */
-//编写类 NSObject具备创建对象
-@interface Iphone : NSObject {
-    
-@public
-    float _model;
-    int _cpu;
-    double _size;
-    int _color;
-    
-}
--(NSString *) loadMSg;
-@end
-
 @interface  MyClass : NSObject
 {
     int count;
@@ -36,6 +24,21 @@
 -(id) initWithString:(NSString*)aName;
 +(MyClass*)createMyClassWithString:(NSString*)aName;
 
+@end
+
+//编写类 NSObject具备创建对象
+@interface Iphone : NSObject {
+    
+@public
+    float _model;
+    int _cpu;
+    double _size;
+    int _color;
+    
+}
+-(NSString *) loadMSg;
+-(int)signal:(int)number;
++(int)sumWithValue1:(int)value1 andValue2:(int)value2;
 @end
 
 //实现类
@@ -54,12 +57,19 @@
 {
     return @"Objective-C Msg";
 }
++(int)sumWithValue1:(int)value1 andValue2:(int)value2
+{
+    return value1 + value2;
+}
+-(int)signal:(int)number
+{
+    return 1;
+}
 - (void) about
 {
     NSLog(@"device log:");
 }
 @end
-
 
 typedef struct {
     int year;
@@ -87,9 +97,9 @@ int main(int argc, const char * argv[]) {
     //自动释放池
     @autoreleasepool {
         // insert code here...
-        NSLog(@"Hello, World!");
-        NSLog(@"Objective-C OK!");
-        NSLog(@"%i", 2^10);
+//        NSLog(@"Hello, World!");
+//        NSLog(@"Objective-C OK!");
+//        NSLog(@"%i", 2^10);
         NSMutableString *str = [NSMutableString stringWithString:@"hello"];
         //分配空间 + 初始化
         Test *test = [[Test alloc]init];
@@ -97,6 +107,9 @@ int main(int argc, const char * argv[]) {
         test.str2 = str;
         [str appendString:@" world"];
         NSLog(@"str:%@  str1:%@  str2:%@",str,test.str1,test.str2);
+        
+        Soldier *sd = [Soldier new];
+        sd->_name = @"njr";
     }
     Iphone *p = [Iphone new];
     //使用一个指针 保存了 一个对象的地址 那么称这个指针为某个类型的对象
@@ -106,6 +119,7 @@ int main(int argc, const char * argv[]) {
     p->_cpu = 1;
     
     [p about];
+    [p signal:1565167];
     //输出C语言字符串 %s OC用%@
     NSLog(@"content = %@", [p loadMSg]);
     //带占位符
