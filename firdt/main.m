@@ -7,19 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Test.h"
 /*
  
  */
 //编写类 NSObject具备创建对象
 @interface Iphone : NSObject {
     
-    @public
+@public
     float _model;
     int _cpu;
     double _size;
     int _color;
+    
 }
-
+-(NSString *) loadMSg;
 @end
 
 @interface  MyClass : NSObject
@@ -38,7 +40,20 @@
 
 //实现类
 @implementation Iphone
-//OC中类方法用+ 对象方法用-
+/*
+ OC中类方法用+ 对象方法用-
+ 对象方法可以直接访问对象属性，必须使用对象调用
+ 对象方法中可以直接调用其他对象方法
+ 对象方法中可以抵用类方法
+ 
+ 类方法不可以直接访问对象属性，必须使用类调用
+ 类方法中不可以直接调用对象方法
+ 类方法中可以直接调用类方法
+ */
+- (NSString *) loadMSg
+{
+    return @"Objective-C Msg";
+}
 - (void) about
 {
     NSLog(@"device log:");
@@ -51,6 +66,13 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Hello, World!");
         NSLog(@"Objective-C OK!");
         NSLog(@"%i", 2^10);
+        NSMutableString *str = [NSMutableString stringWithString:@"hello"];
+        //分配空间 + 初始化
+        Test *test = [[Test alloc]init];
+        test.str1 = str;
+        test.str2 = str;
+        [str appendString:@" world"];
+        NSLog(@"str:%@  str1:%@  str2:%@",str,test.str1,test.str2);
     }
     Iphone *p = [Iphone new];
     //使用一个指针 保存了 一个对象的地址 那么称这个指针为某个类型的对象
@@ -60,6 +82,8 @@ int main(int argc, const char * argv[]) {
     p->_cpu = 1;
     
     [p about];
+    //输出C语言字符串 %s OC用%@
+    NSLog(@"content = %@", [p loadMSg]);
     struct Person {
         int age;
         char *name;
