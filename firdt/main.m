@@ -59,6 +59,30 @@
     NSLog(@"device log:");
 }
 @end
+
+
+typedef struct {
+    int year;
+    int month;
+    int day;
+} Date;
+
+@interface Student : NSObject
+{
+@public
+    NSString *_name;
+    Date _birthday;
+}
+-(void)say;
+@end
+
+@implementation Student
+-(void)say{
+    NSLog(@"%@ %i %i %i",_name, -_birthday.year, -_birthday.month, -_birthday.day);
+}
+
+@end
+
 int main(int argc, const char * argv[]) {
     //自动释放池
     @autoreleasepool {
@@ -84,6 +108,14 @@ int main(int argc, const char * argv[]) {
     [p about];
     //输出C语言字符串 %s OC用%@
     NSLog(@"content = %@", [p loadMSg]);
+    //带占位符
+    NSString *str = [NSString stringWithFormat:@"sid = %f\n",1.75];
+    NSLog(@"str = %@", str);
+    
+    char name[] = "njr"; // \0
+    size_t size = sizeof(name);
+    size_t size2 = strlen(name);
+    printf("size = %lu size2 = %lu\n", size, size2);
     struct Person {
         int age;
         char *name;
@@ -96,5 +128,16 @@ int main(int argc, const char * argv[]) {
     
     pis->age = 30;
     pis->name = "njr";
+    
+    Student *stu = [Student new];
+    stu->_name = @"njr";
+    //通过强制类型转换赋值的原理是 将date结构体所有属性全部拷贝一份
+    stu->_birthday = (Date){1998,1,2};
+    
+//    stu->_birthday.year = 2000;
+//    stu->_birthday.month = 12;
+//    stu->_birthday.day = 1;
+    
     return 0;
 }
+
