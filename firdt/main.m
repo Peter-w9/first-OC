@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Test.h"
 #import "Soldier.h"
-/*
- 
- */
+
+typedef enum
+{
+    kIColorBlack,
+    kIColorWhite,
+    kIColorTuHaoGold
+} IColor;
+
 @interface  MyClass : NSObject
 {
     int count;
@@ -33,26 +38,17 @@
     float _model;
     int _cpu;
     double _size;
-    int _color;
-    
+//    int _color;
+    IColor _color;
 }
 -(NSString *) loadMSg;
 -(int)signal:(int)number;
 +(int)sumWithValue1:(int)value1 andValue2:(int)value2;
+-(NSString *)colorWithNumber:(IColor)number;
 @end
 
 //实现类
 @implementation Iphone
-/*
- OC中类方法用+ 对象方法用-
- 对象方法可以直接访问对象属性，必须使用对象调用
- 对象方法中可以直接调用其他对象方法
- 对象方法中可以抵用类方法
- 
- 类方法不可以直接访问对象属性，必须使用类调用
- 类方法中不可以直接调用对象方法
- 类方法中可以直接调用类方法
- */
 - (NSString *) loadMSg
 {
     return @"Objective-C Msg";
@@ -67,7 +63,26 @@
 }
 - (void) about
 {
-    NSLog(@"device log:");
+    Iphone *p = [Iphone new];
+    NSString *name = [p colorWithNumber:_color];
+    NSLog(@"device log:型号 = %f, cpu % i, 尺寸 = %f, 颜色 = %@", _model, _cpu, _size, name);
+}
+-(NSString *)colorWithNumber:(IColor)number
+{
+    NSString *name;
+    switch (_color) {
+        case 0:
+            name = @"深夜黑";
+            break;
+        case 1:
+            name = @"白";
+        case 2:
+            name = @"土豪金";
+        default:
+            name = @"粉色";
+            break;
+    }
+    return name;
 }
 @end
 
@@ -114,7 +129,7 @@ int main(int argc, const char * argv[]) {
     Iphone *p = [Iphone new];
     //使用一个指针 保存了 一个对象的地址 那么称这个指针为某个类型的对象
     p->_size = 3.5;
-    p->_color = 0;
+    p->_color = kIColorBlack;
     p->_model = 3.1;
     p->_cpu = 1;
     
@@ -130,6 +145,7 @@ int main(int argc, const char * argv[]) {
     size_t size = sizeof(name);
     size_t size2 = strlen(name);
     printf("size = %lu size2 = %lu\n", size, size2);
+    
     struct Person {
         int age;
         char *name;
@@ -139,7 +155,6 @@ int main(int argc, const char * argv[]) {
     struct Person *pis = &person;
 //    (*pis).age = 30;
 //    (*pis).name = "njr";
-    
     pis->age = 30;
     pis->name = "njr";
     
@@ -147,7 +162,7 @@ int main(int argc, const char * argv[]) {
     stu->_name = @"njr";
     //通过强制类型转换赋值的原理是 将date结构体所有属性全部拷贝一份
     stu->_birthday = (Date){1998,1,2};
-    
+
 //    stu->_birthday.year = 2000;
 //    stu->_birthday.month = 12;
 //    stu->_birthday.day = 1;
