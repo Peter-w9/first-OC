@@ -122,9 +122,7 @@ int main(int argc, const char * argv[]) {
         test.str2 = str;
         [str appendString:@" world"];
         NSLog(@"str:%@  str1:%@  str2:%@",str,test.str1,test.str2);
-        
-        Soldier *sd = [Soldier new];
-        sd->_name = @"njr";
+    
     }
     Iphone *p = [Iphone new];
     //使用一个指针 保存了 一个对象的地址 那么称这个指针为某个类型的对象

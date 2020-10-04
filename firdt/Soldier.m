@@ -7,7 +7,11 @@
 //
 
 #import "Soldier.h"
-
 @implementation Soldier
 
+-(void)fire:(Gun *)gun
+{
+    [gun shoot];
+}
 @end
+

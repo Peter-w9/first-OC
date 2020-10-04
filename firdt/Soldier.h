@@ -7,21 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface Gun : NSObject
-{
-@public
-    int _bullet;
-    
-}
-@end
-
-@implementation Gun
-
-
-@end
+#import "Gun.h"
 
 @interface Soldier : NSObject
 {
@@ -32,14 +18,3 @@ NS_ASSUME_NONNULL_BEGIN
 }
 -(void)fire:(Gun *)gun;
 @end
-
-@implementation Soldier
-
--(void)fire:(Gun *)gun
-{
-    NSLog(@"fire……");
-}
-@end
-
-
-NS_ASSUME_NONNULL_END
